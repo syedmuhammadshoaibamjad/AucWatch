@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.Bidding"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Auction Watch Image -->
+    <ImageView
+        android:id="@+id/auction_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/auction_title"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="ContentDescription" />
+
+    <!-- Auction Title -->
+    <TextView
+        android:id="@+id/auction_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Auction Title"
+        android:textStyle="bold"
+        android:textColor="@color/ic_launcher_background"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@id/auction_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <!-- Current Bid Display -->
+    <TextView
+        android:id="@+id/current_bid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Bid: $0"
+        android:textColor="@color/red"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/auction_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="14dp"
+        android:gravity="center" />
+
+    <!-- Bid Input Label -->
+    <TextView
+        android:id="@+id/bid_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Your Bid:"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/current_bid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bidding Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/bid_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bid_label"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/bid_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Your Offer Here"
+            android:inputType="numberDecimal"
+            android:textColor="@color/ic_launcher_background" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Bid Now Button -->
+    <Button
+        android:id="@+id/bid_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Place Bid"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/ic_launcher_background"
+        app:layout_constraintTop_toBottomOf="@id/bid_input_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

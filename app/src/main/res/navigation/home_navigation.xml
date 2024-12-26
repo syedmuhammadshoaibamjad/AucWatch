@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/item_Auction">
+
+
+    <fragment
+        android:id="@+id/item_Watches"
+        android:name="com.shoaib.aucwatch.ui.main.WatchFragment"
+        android:label="WatchFragment" />
+    <fragment
+        android:id="@+id/item_Auction"
+        android:name="com.shoaib.aucwatch.ui.auctionfragment.AuctionFragment"
+        android:label="Auction" />
+    <fragment
+        android:id="@+id/item_User"
+        android:name="com.shoaib.aucwatch.ui.main.UserFragment"
+        android:label="User" />
+
+</navigation>

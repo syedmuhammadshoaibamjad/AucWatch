@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1091434171344",
+    "project_id": "aucwatch-293ee",
+    "storage_bucket": "aucwatch-293ee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091434171344:android:c782bb59220b104f9687d5",
+        "android_client_info": {
+          "package_name": "com.shoaib.aucwatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2LX05mQ8_Ms7XiHwaS5tFf75z89W2abk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

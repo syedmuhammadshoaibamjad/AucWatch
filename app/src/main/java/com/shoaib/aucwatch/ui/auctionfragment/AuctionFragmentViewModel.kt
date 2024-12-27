@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shoaib.aucwatch.repository.AuctionRepository
 import com.shoaib.aucwatch.ui.AuctionWatchModelClass
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 
@@ -17,6 +18,7 @@ class AuctionFragmentViewModel : ViewModel() {
 
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> get() = _errorMessage
+    val isFailure = MutableStateFlow<String?>(null)
 
     init {
         fetchAuctions()
@@ -32,10 +34,10 @@ class AuctionFragmentViewModel : ViewModel() {
     }
 
     // Update the bidding price of an auction
-    fun updateBiddingPrice(auctionId: String, newBiddingPrice: Int) {
+    fun updateBiddingPrice(auctionId: String, newBiddingPrice: Int, updatedUserName: String?) {
         viewModelScope.launch {
             try {
-                val result = repository.updateAuctionBiddingPrice(auctionId, newBiddingPrice)
+                val result = repository.updateAuctionBiddingPrice(auctionId, newBiddingPrice,updatedUserName)
                 if (result.isSuccess) {
                     fetchAuctions() // Refresh auctions to reflect updated bidding price
                 } else {
@@ -46,7 +48,9 @@ class AuctionFragmentViewModel : ViewModel() {
             }
         }
     }
+
 }
+
 
 
 

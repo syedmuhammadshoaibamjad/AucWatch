@@ -2,4 +2,14 @@
     <string name="app_name">AucWatch</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_winner">No winner found.</string>
+    <string name="final_price">Final Price: $%1$.2f</string>
+    <string name="unknown_user">Unknown User</string>
+    <string name="user_id_null">User ID is null</string>
+    <string name="auction_id_null">Auction ID is null</string>
+    <string name="error_fetching_username">Error fetching username: %1$s</string>
+    <string name="auction_not_found">Failed to fetch auction item.</string>
+    <string name="item_sent_home">Item sent to HomeFragment</string>
+    <string name="error_generic">Error: %1$s</string>
+    <string name="winner_name">Winner: %1$s</string>
 </resources>

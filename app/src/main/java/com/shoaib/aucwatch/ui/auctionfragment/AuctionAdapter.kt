@@ -1,13 +1,16 @@
-package com.shoaib.aucwatch.ui.auctionfragment
+package com.shoaib.aucwatch.ui.auctionfragment;
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.shoaib.aucwatch.R
-import com.shoaib.aucwatch.databinding.ItemDesignBinding
-import com.shoaib.aucwatch.ui.AuctionWatchModelClass
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.shoaib.aucwatch.R;
+import com.shoaib.aucwatch.databinding.ItemDesignBinding;
+import com.shoaib.aucwatch.ui.AuctionWatchModelClass;
+import com.shoaib.aucwatch.ui.main.Details;
 
 class AuctionAdapter(
     private val items: MutableList<AuctionWatchModelClass>,
@@ -31,7 +34,13 @@ class AuctionAdapter(
                 .into(imageView4)
 
             buttonBid.setOnClickListener { onBidClick(auction) }
-            root.setOnClickListener { onItemClick(auction) }
+
+            root.setOnClickListener {
+                val intent = Intent(binding.root.context, Details::class.java)
+                intent.putExtra("data", Gson().toJson(auction))
+                binding.root.context.startActivity(intent)
+                onItemClick(auction)
+            }
         }
     }
 

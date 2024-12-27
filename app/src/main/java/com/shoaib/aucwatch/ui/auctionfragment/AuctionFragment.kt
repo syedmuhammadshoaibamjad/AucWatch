@@ -2,6 +2,7 @@ package com.shoaib.aucwatch.ui.auctionfragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +48,11 @@ class AuctionFragment : Fragment() {
                 }
                 startActivity(intent)
             },
+
             onBidClick = { auction ->
                 val intent = Intent(requireContext(), BiddingActivity::class.java).apply {
                     putExtra(AUCTION_ID_KEY, auction.id)
+                    putExtra("userName", auction.userName)
                     putExtra("auction_title", auction.title)
                     putExtra("auction_starting_price", auction.startingprice)
                     putExtra("auction_bidding_price", auction.biddingprice)
@@ -86,19 +89,33 @@ class AuctionFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_BID && resultCode == AppCompatActivity.RESULT_OK) {
-            val updatedBid = data?.getIntExtra(BIDDING_PRICE_KEY, -1) ?: -1
-            val auctionId = data?.getStringExtra(AUCTION_ID_KEY)
 
-            if (updatedBid > -1 && auctionId != null) {
+        // Check if the result is from the BiddingActivity
+        if (requestCode == REQUEST_CODE_BID && resultCode == AppCompatActivity.RESULT_OK && data != null) {
+            val updatedBid = data.getIntExtra(BIDDING_PRICE_KEY, -1)
+            val auctionId = data.getStringExtra(AUCTION_ID_KEY)
+            val updatedUserName = data.getStringExtra(USER_NAME_KEY)
+
+            if (updatedBid > -1 && !auctionId.isNullOrEmpty()) {
+                // Find the auction index in the list
                 val index = viewModel.auctions.value?.indexOfFirst { it.id == auctionId }
+
                 if (index != null && index >= 0) {
-                    viewModel.updateBiddingPrice(auctionId, updatedBid)
+                    // Update the ViewModel and notify the adapter
+                    viewModel.updateBiddingPrice(auctionId, updatedBid, updatedUserName)
                     adapter.notifyItemChanged(index)
+                } else {
+                    // Log or handle the case where the auction ID is not found
+                    Log.w("onActivityResult", "Auction ID not found in the list.")
                 }
+            } else {
+                Log.w("onActivityResult", "Invalid bid or auction ID.")
             }
+        } else {
+            Log.d("onActivityResult", "Request cancelled or invalid result.")
         }
     }
+
 
     private fun setupListeners() {
         binding.floatingActionButton.setOnClickListener {
@@ -111,6 +128,7 @@ class AuctionFragment : Fragment() {
         const val REQUEST_CODE_BID = 100
         const val AUCTION_ID_KEY = "AUCTION_ID"
         const val BIDDING_PRICE_KEY = "bidding_price"
+        const val USER_NAME_KEY = "userName"
     }
 }
 

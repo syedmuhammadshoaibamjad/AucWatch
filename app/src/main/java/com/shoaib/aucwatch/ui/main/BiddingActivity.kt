@@ -10,18 +10,21 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.shoaib.aucwatch.R
+import com.shoaib.aucwatch.repository.AuthRepository
 
 class BiddingActivity : AppCompatActivity() {
 
     private var biddingPrice = 0
+    private val auth = AuthRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bidding)
 
         // Retrieve auction details passed from AuctionFragment
+        var userName = auth.getCurrentUser()?.displayName ?: "Unknown"
         val auctionId = intent.getStringExtra("AUCTION_ID") ?: ""
-        val auctionTitle = intent.getStringExtra("auction_title")
+        val auctionTitle = intent.getStringExtra("auction_title") ?: "Unknown Auction"
         val auctionImage = intent.getStringExtra("auction_image")
         val auctionStartingPrice = intent.getIntExtra("auction_starting_price", 0)
         var currentBiddingPrice = intent.getIntExtra("auction_bidding_price", 0)
@@ -40,8 +43,9 @@ class BiddingActivity : AppCompatActivity() {
         if (!auctionImage.isNullOrEmpty()) {
             // Load image using Glide
             Glide.with(this)
-                .load(auctionImage) // URL of the image
-                .placeholder(R.drawable.logo) // Placeholder image while loading
+                .load(auctionImage)
+                .placeholder(R.drawable.logo)
+                .error(R.drawable.logo)
                 .into(auctionImageView)
         }
 
@@ -70,6 +74,11 @@ class BiddingActivity : AppCompatActivity() {
                         }
 
                         else -> {
+
+                            // Fetch user name from AuthRepository
+                            var currentUser = auth.getCurrentUser()
+                            userName = currentUser?.displayName ?: "Unknown"
+
                             // Update the bidding price and display it
                             currentBiddingPrice = biddingPrice
                             currentBidView.text = "Current Highest Bid: $$currentBiddingPrice"
@@ -77,7 +86,8 @@ class BiddingActivity : AppCompatActivity() {
                             // Pass the new bid back to the calling activity/fragment
                             val resultIntent = Intent().apply {
                                 putExtra("bidding_price", currentBiddingPrice)
-                                putExtra("AUCTION_ID", auctionId) // Ensure the auction_id is returned
+                                putExtra("AUCTION_ID", auctionId)
+                                putExtra("userName", userName)
                             }
 
                             Toast.makeText(
@@ -85,9 +95,12 @@ class BiddingActivity : AppCompatActivity() {
                                 "Bid placed successfully: $$currentBiddingPrice",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            setResult(RESULT_OK, resultIntent)
 
-                            // Close the activity after setting the result
+                            // Clear input field
+                            bidInputField.text?.clear()
+
+                            // Set the result and finish the activity
+                            setResult(RESULT_OK, resultIntent)
                             finish()
                         }
                     }

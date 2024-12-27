@@ -3,12 +3,10 @@ package com.shoaib.aucwatch.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.shoaib.aucwatch.R
-import com.shoaib.aucwatch.ui.main.MainActivity
+import com.shoaib.aucwatch.ui.auth.LoginActivity
+
 
 class Splash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +15,7 @@ class Splash : AppCompatActivity() {
 
         Handler(mainLooper).postDelayed(
             {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }, 2000
         )

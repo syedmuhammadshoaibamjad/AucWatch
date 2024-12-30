@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.shoaib.aucwatch.R;
 import com.shoaib.aucwatch.databinding.ItemDesignBinding;
-import com.shoaib.aucwatch.ui.AuctionWatchModelClass;
+import com.shoaib.aucwatch.Model.AuctionWatchModelClass;
 import com.shoaib.aucwatch.ui.main.Details;
 
 class AuctionAdapter(

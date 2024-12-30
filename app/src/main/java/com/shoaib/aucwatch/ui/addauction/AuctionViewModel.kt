@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.shoaib.aucwatch.repository.AuctionRepository
 import com.shoaib.aucwatch.repository.AuthRepository
 import com.shoaib.aucwatch.repository.ImageRepository
-import com.shoaib.aucwatch.ui.AuctionWatchModelClass
+import com.shoaib.aucwatch.Model.AuctionWatchModelClass
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

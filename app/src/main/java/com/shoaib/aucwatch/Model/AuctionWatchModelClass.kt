@@ -1,4 +1,4 @@
-package com.shoaib.aucwatch.ui
+package com.shoaib.aucwatch.Model
 
 class AuctionWatchModelClass{
     var id: String? = ""

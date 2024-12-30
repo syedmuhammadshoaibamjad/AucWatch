@@ -4,9 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.shoaib.aucwatch.R
 import com.shoaib.aucwatch.databinding.ItemDesignBinding
-import com.shoaib.aucwatch.ui.AuctionWatchModelClass
+import com.shoaib.aucwatch.Model.AuctionWatchModelClass
 import com.shoaib.aucwatch.ui.addauction.AddWatchAuction
 
 class ItemAdapter(private val items: List<AuctionWatchModelClass>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {

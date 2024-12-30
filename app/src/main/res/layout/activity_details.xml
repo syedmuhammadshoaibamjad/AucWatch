@@ -49,6 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="18dp"
+                android:layout_marginTop="20dp"
                 android:text="Highest Bidder: john.doe@example.com"
                 android:textColor="@color/black"
                 android:textSize="16sp"

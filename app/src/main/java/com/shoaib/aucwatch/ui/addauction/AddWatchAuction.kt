@@ -10,13 +10,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.shoaib.aucwatch.databinding.ActivityAddWatchAuctionBinding
-import com.shoaib.aucwatch.ui.AuctionWatchModelClass
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import com.shoaib.aucwatch.Model.AuctionWatchModelClass
 import kotlinx.coroutines.launch
 
 class AddWatchAuction : AppCompatActivity() {

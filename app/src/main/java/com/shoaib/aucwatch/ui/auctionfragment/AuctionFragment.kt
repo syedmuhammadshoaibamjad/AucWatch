@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.shoaib.aucwatch.databinding.FragmentAuctionBinding
 import com.shoaib.aucwatch.ui.addauction.AddWatchAuction
 import com.shoaib.aucwatch.ui.main.BiddingActivity
@@ -71,10 +73,8 @@ class AuctionFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.auctions.observe(viewLifecycleOwner) { items ->
             if (items.isNullOrEmpty()) {
-
                 binding.recyclerview.visibility = View.GONE
             } else {
-
                 binding.recyclerview.visibility = View.VISIBLE
                 adapter.updateData(items)
             }
@@ -90,22 +90,18 @@ class AuctionFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Check if the result is from the BiddingActivity
         if (requestCode == REQUEST_CODE_BID && resultCode == AppCompatActivity.RESULT_OK && data != null) {
             val updatedBid = data.getIntExtra(BIDDING_PRICE_KEY, -1)
             val auctionId = data.getStringExtra(AUCTION_ID_KEY)
             val updatedUserName = data.getStringExtra(USER_NAME_KEY)
 
             if (updatedBid > -1 && !auctionId.isNullOrEmpty()) {
-                // Find the auction index in the list
                 val index = viewModel.auctions.value?.indexOfFirst { it.id == auctionId }
 
                 if (index != null && index >= 0) {
-                    // Update the ViewModel and notify the adapter
                     viewModel.updateBiddingPrice(auctionId, updatedBid, updatedUserName)
                     adapter.notifyItemChanged(index)
                 } else {
-                    // Log or handle the case where the auction ID is not found
                     Log.w("onActivityResult", "Auction ID not found in the list.")
                 }
             } else {
@@ -116,12 +112,22 @@ class AuctionFragment : Fragment() {
         }
     }
 
-
     private fun setupListeners() {
-        binding.floatingActionButton.setOnClickListener {
-            val intent = Intent(requireContext(), AddWatchAuction::class.java)
-            startActivity(intent)
+        if (isUserAdmin()) {
+            binding.floatingActionButton.visibility = View.VISIBLE
+            binding.floatingActionButton.setOnClickListener {
+                val intent = Intent(requireContext(), AddWatchAuction::class.java)
+                startActivity(intent)
+            }
+        } else {
+            binding.floatingActionButton.visibility = View.GONE
         }
+    }
+
+    private fun isUserAdmin(): Boolean {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val adminEmail = "sp22-bcs-109@students.cuisahiwal.edu.pk"
+        return currentUser?.email?.equals(adminEmail, ignoreCase = true) == true
     }
 
     companion object {
@@ -131,4 +137,3 @@ class AuctionFragment : Fragment() {
         const val USER_NAME_KEY = "userName"
     }
 }
-

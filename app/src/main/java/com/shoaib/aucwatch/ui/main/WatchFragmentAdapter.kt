@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shoaib.aucwatch.R
 import com.shoaib.aucwatch.databinding.SoldwatchdesignBinding
-import com.shoaib.aucwatch.ui.AuctionWatchModelClass
+import com.shoaib.aucwatch.Model.AuctionWatchModelClass
 
 class WatchFragmentAdapter(
     private val items: List<AuctionWatchModelClass>, // Use an immutable list

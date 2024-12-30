@@ -4,11 +4,10 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.snapshots
-import com.shoaib.aucwatch.ui.AuctionWatchModelClass
+import com.shoaib.aucwatch.Model.AuctionWatchModelClass
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.tasks.await
 
 class AuctionRepository {
@@ -32,11 +31,7 @@ class AuctionRepository {
         }
     }
 
-//    fun getAuctions(): Flow<List<AuctionWatchModelClass>> {
-//        return auctionCollection.snapshots().map { snapshot ->
-//            snapshot.toObjects(AuctionWatchModelClass::class.java)
-//        }.distinctUntilChanged()
-//    }
+
     fun getAuctions(): Flow<List<AuctionWatchModelClass>> {
         return auctionCollection
             .whereEqualTo("sold",false)
@@ -58,10 +53,7 @@ class AuctionRepository {
         }
     }
 
-    suspend fun updateAuctionBiddingPrice(
-        auctionId: String,
-        newBiddingPrice: Int,
-        updatedUserName: String?
+    suspend fun updateAuctionBiddingPrice(auctionId: String, newBiddingPrice: Int, updatedUserName: String?
     ): Result<Boolean> {
         return try {
             if (auctionId.isBlank()) {

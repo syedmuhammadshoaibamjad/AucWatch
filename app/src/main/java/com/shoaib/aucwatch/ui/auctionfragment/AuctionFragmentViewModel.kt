@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shoaib.aucwatch.repository.AuctionRepository
-import com.shoaib.aucwatch.ui.AuctionWatchModelClass
+import com.shoaib.aucwatch.Model.AuctionWatchModelClass
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
